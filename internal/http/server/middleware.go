@@ -35,9 +35,9 @@ func WithLogging(next http.HandlerFunc) http.HandlerFunc {
 }
 
 type statistics struct {
-	counter      map[string]uint64
-	responseTime map[string]time.Duration
-	mutex        sync.Mutex
+	Counter        map[string]int64 `json:"counter"`
+	ResponseTimeMs map[string]int64 `json:"response_time_ms"`
+	mutex          sync.Mutex
 }
 
 // WithStatistics collects data about the function calls
@@ -49,9 +49,9 @@ func WithStatistics(stats *statistics, next http.HandlerFunc) http.HandlerFunc {
 		// Delegate to the next handler
 		next.ServeHTTP(w, r)
 		// Create statistics
-		name := strings.TrimPrefix("/function/", r.RequestURI)
-		stats.counter[name]++
-		stats.responseTime[name] = time.Since(start)
+		name := strings.TrimPrefix(r.RequestURI, "/function/")
+		stats.Counter[name]++
+		stats.ResponseTimeMs[name] = time.Since(start).Milliseconds()
 	}
 }
 

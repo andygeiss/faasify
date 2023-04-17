@@ -24,5 +24,5 @@
 
 ## Display the embedded web content
 
-    curl http://127.0.0.1:3000/static
+    curl http://127.0.0.1:3000/static/
 

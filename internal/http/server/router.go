@@ -4,7 +4,6 @@ package server
 import (
 	"embed"
 	"net/http"
-	"time"
 
 	"github.com/andygeiss/faasify/internal/http/server/functions/status"
 )
@@ -16,13 +15,13 @@ var staticFS embed.FS
 
 func router() (mux *http.ServeMux) {
 	stats := &statistics{
-		counter:      make(map[string]uint64),
-		responseTime: make(map[string]time.Duration),
+		Counter:        make(map[string]int64),
+		ResponseTimeMs: make(map[string]int64),
 	}
 	mux = http.NewServeMux()
 	mux.HandleFunc("/function/status", WithAuthentication(WithLogging(WithStatistics(stats, status.HandlerFunc()))))
 
-	mux.HandleFunc("/stats/", statsHandler(stats))
+	mux.HandleFunc("/stats", statsHandler(stats))
 	mux.Handle("/static/", http.FileServer(http.FS(staticFS)))
 	return
 }
