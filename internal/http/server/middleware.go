@@ -49,8 +49,7 @@ func WithStatistics(stats *statistics, next http.HandlerFunc) http.HandlerFunc {
 		// Delegate to the next handler
 		next.ServeHTTP(w, r)
 		// Create statistics
-		name := r.RequestURI
-		log.Printf("name=%s", name)
+		name := strings.TrimPrefix("/function/", r.RequestURI)
 		stats.counter[name]++
 		stats.responseTime[name] = time.Since(start)
 	}

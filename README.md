@@ -12,7 +12,7 @@
 
 ## Run the server
 
-    FAASIFY_TOKEN=YOUR_TOKEN ./build/serve-http
+    FAASIFY_ADDESS=":3000" FAASIFY_TOKEN="YOUR_TOKEN" ./build/serve-http
 
 ## Call a function
 
@@ -20,9 +20,9 @@
 
 ## Display the function statistics
 
-    http://127.0.0.1:3000/stats
+    curl http://127.0.0.1:3000/stats
 
 ## Display the embedded web content
 
-    http://127.0.0.1:3000/static
+    curl http://127.0.0.1:3000/static
 
