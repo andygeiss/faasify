@@ -24,8 +24,15 @@ func (a *generator) Setup() {
 	}
 	entries := a.readEntries()
 	wd, _ := os.Getwd()
-	data := struct{ Functions []string }{Functions: entries}
-	a.writeTemplate("templates/router.tmpl", data, wd+"/router.go")
+	data := struct {
+		Functions []string
+		Token     string
+	}{
+		Functions: entries,
+		Token:     os.Getenv("FAASIFY_TOKEN"),
+	}
+	a.writeTemplate("templates/faasify-js.tmpl", data, wd+"/static/faasify.js")
+	a.writeTemplate("templates/router-go.tmpl", data, wd+"/router.go")
 }
 
 func (a *generator) Teardown() {

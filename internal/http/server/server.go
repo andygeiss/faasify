@@ -7,8 +7,6 @@ import (
 	"time"
 )
 
-var securityToken string
-
 type server struct {
 	addr  string
 	err   error
@@ -34,22 +32,17 @@ func (a *server) Setup() {
 	if a.err != nil {
 		return
 	}
-
+	// Configure the server address via environment
 	addr := os.Getenv("FAASIFY_ADDRESS")
 	if addr == "" {
 		addr = ":3000"
 	}
 	a.addr = addr
-
+	// Create a custom http.Server with timeouts
 	a.srv = &http.Server{
 		Addr:         addr,
 		WriteTimeout: time.Second * 5,
 		Handler:      http.TimeoutHandler(router(), time.Second*1, ""),
-	}
-
-	securityToken = os.Getenv("FAASIFY_TOKEN")
-	if securityToken == "" {
-		securityToken = "TOKEN_SHOULD_BE_CHANGED"
 	}
 }
 

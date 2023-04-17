@@ -6,9 +6,6 @@ import (
 	"github.com/andygeiss/faasify/internal/http/server"
 )
 
-// These variables will be set on compile time
-var app, build, version string
-
 func main() {
 	srv := server.New()
 	srv.Setup()

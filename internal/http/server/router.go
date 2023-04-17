@@ -9,14 +9,23 @@ import (
 )
 
 //go:embed static
-var staticFS embed.FS
+var embedFS embed.FS
 
 //go:generate go run ../../../cmd/update-functions/main.go
 
-func router() (mux *http.ServeMux) {
-	mux = http.NewServeMux()
-	mux.HandleFunc("/function/status", status.HandlerFunc())
+const Token = "RvOYJFyqSIfZBz6wHqg5pDwyAWrkyBK8xO3niPhFOi0="
 
-	mux.Handle("/static/", http.FileServer(http.FS(staticFS)))
+func router() (mux *http.ServeMux) {
+	// Init multiplexer
+	mux = http.NewServeMux()
+
+	// Add functions
+	mux.HandleFunc("/function/status", WithAuthentication(WithLogging(WithStatistics(status.HandlerFunc()))))
+
+	// Serve statistics
+	mux.HandleFunc("/stats", WithAuthentication(WithLogging(statsHandler())))
+
+	// Serve embedded files
+	mux.HandleFunc("/", WithEmbeddedFiles(embedFS, "static"))
 	return
 }

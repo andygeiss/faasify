@@ -1,3 +1,2 @@
-build
-functions
-static
+build/client
+build/server

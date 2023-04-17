@@ -1,0 +1,19 @@
+:root {
+    --background: var(--color-5);
+    --primary: var(--color-5);
+    --secondary: var(--color-2);
+    --tertiary: var(--color-3);
+    --accent: var(--color-4);
+    --on-background: var(--color-0);
+    --on-primary: var(--color-0);
+    --on-secondary: var(--color-0);
+    --on-tertiary: var(--color-0);
+    --on-accent: var(--color-0); 
+    --color-0: #1d2021;
+    --color-1: #282828; 
+    --color-2: #8ec07c;
+    --color-3: #83a598;
+    --color-4: #d3869b;
+    --color-5: #fbf1c7;
+}
+
