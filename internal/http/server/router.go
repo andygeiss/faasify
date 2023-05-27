@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/andygeiss/faasify/internal/http/server/functions/status"
+	"github.com/andygeiss/faasify/internal/http/server/functions/wasm_demo"
 )
 
 //go:embed static
@@ -13,7 +14,7 @@ var embedFS embed.FS
 
 //go:generate go run ../../../cmd/update-functions/main.go
 
-const Token = "RvOYJFyqSIfZBz6wHqg5pDwyAWrkyBK8xO3niPhFOi0="
+const Token = "kGKtYBh4EbmA1cCQ6IMdYNLV7hs/27tKk9nMaT9Sbp4="
 
 func router() (mux *http.ServeMux) {
 	// Init multiplexer
@@ -21,6 +22,7 @@ func router() (mux *http.ServeMux) {
 
 	// Add functions
 	mux.HandleFunc("/function/status", WithAuthentication(WithLogging(WithStatistics(status.HandlerFunc()))))
+	mux.HandleFunc("/function/wasm_demo", WithAuthentication(WithLogging(WithStatistics(wasm_demo.HandlerFunc()))))
 
 	// Serve statistics
 	mux.HandleFunc("/stats", WithAuthentication(WithLogging(statsHandler())))
