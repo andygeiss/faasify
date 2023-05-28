@@ -1,7 +1,6 @@
 package server
 
 import (
-	"compress/gzip"
 	"embed"
 	"log"
 	"net/http"
@@ -70,10 +69,11 @@ func WithEmbeddedFiles(efs embed.FS, prefix string) http.HandlerFunc {
 		w.Header().Add("Content-Type", mimeType)
 		// Compress file content
 		w.Header().Set("Content-Encoding", "gzip")
-		gz := gzip.NewWriter(w)
-		defer gz.Close()
-		gz.Write(content)
-		//w.Write(content)
+		// Embedded files are already compressed!
+		//gz := gzip.NewWriter(w)
+		//defer gz.Close()
+		//gz.Write(content)
+		w.Write(content)
 	}
 }
 

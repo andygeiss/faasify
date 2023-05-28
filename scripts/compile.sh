@@ -14,8 +14,8 @@ VERSION_INITIAL="00.01.00"
 
 # Create shortcuts for functions and static files
 if [ ! -e "./functions" ] || [ ! -e "./static" ]; then
-    ln -sf "./internal/http/server/functions" .
-    ln -sf "./internal/http/server/static" .
+    ln -sf ./internal/http/server/functions .
+    ln -sf ./internal/http/server/static .
 fi 
 
 # Initialize git
@@ -29,13 +29,23 @@ fi
 mkdir -p "./build"
 
 FAASIFY_TOKEN=${TOKEN} go generate ./...
-goimports -w "./internal/http/server/router.go"
+goimports -w ./internal/http/server/router.go
 go mod tidy
 
 # Minify and bundle static contents
 rm -f ./static/bundle*
-minify -r -b -o ./static/bundle.js ./static/faasify.js $(find ./static/ -name *.js | grep -v faasify)
+minify -r -b -o ./static/bundle.js ./static/faasify.js $(find ./static/ -name "*.js" | grep -v faasify)
 minify -r -b -o ./static/bundle.css ./static/*.css
+
+# Copy the bundle
+rm -f ./bundle/*
+cp -f ./static/*.htm* ./bundle/
+cp -f ./static/*.svg ./bundle/
+cp -f ./static/bundle.* ./bundle/
+for FILE in $(find ./bundle/ -name "*.*"); do
+    gzip -9 ${FILE}
+    mv ${FILE}.gz ${FILE}
+done
 
 export CGO_ENABLED=0
 FAASIFY_TOKEN=${TOKEN} go build -ldflags "\

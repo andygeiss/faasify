@@ -9,12 +9,12 @@ import (
 	"github.com/andygeiss/faasify/internal/http/server/functions/wasm_demo"
 )
 
-//go:embed static
+//go:embed bundle
 var embedFS embed.FS
 
 //go:generate go run ../../../cmd/update-functions/main.go
 
-const Token = "kGKtYBh4EbmA1cCQ6IMdYNLV7hs/27tKk9nMaT9Sbp4="
+const Token = "3Cz7K8sR/wlj7Xv+kGxEzz0J2GOgPrmhPn2T30LrTh8="
 
 func router() (mux *http.ServeMux) {
 	// Init multiplexer
@@ -28,6 +28,6 @@ func router() (mux *http.ServeMux) {
 	mux.HandleFunc("/stats", WithAuthentication(WithLogging(statsHandler())))
 
 	// Serve embedded files
-	mux.HandleFunc("/", WithEmbeddedFiles(embedFS, "static"))
+	mux.HandleFunc("/", WithEmbeddedFiles(embedFS, "bundle"))
 	return
 }

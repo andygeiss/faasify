@@ -1,9 +1,12 @@
 package wasm_demo
 
 import (
+	"bytes"
+	"compress/gzip"
 	"context"
 	_ "embed"
 	"encoding/json"
+	"io"
 	"log"
 	"net/http"
 
@@ -12,7 +15,7 @@ import (
 )
 
 //go:embed module/fn.wasm
-var fn []byte
+var compressed []byte
 
 type response struct {
 	Data  map[string]any `json:"data,omitempty"`
@@ -20,6 +23,9 @@ type response struct {
 }
 
 func HandlerFunc() http.HandlerFunc {
+	r, _ := gzip.NewReader(bytes.NewReader(compressed))
+	fn, _ := io.ReadAll(r)
+	r.Close()
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		ctx := context.Background()
