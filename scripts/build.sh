@@ -7,7 +7,7 @@ VERSION=`git tag -n5 | head -1 | cut -f1 -d" "`
 
 # Build podman image
 podman build \
-	-f ./build/Dockerfile \
+	-f ./build/Containerfile \
 	-t ${APP}:${VERSION} \
 	.
 
