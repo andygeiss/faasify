@@ -1,23 +1,21 @@
 
-const render = () => {
+const render_app = () => {
     html('#app', ` 
     <div>
-        <button id="btnStatus"> call status </button>
+        <button id="btnStatus"> Status </button>
     </div>
-    `)
+    `);
     bind('#btnStatus', 'click', () => { 
-        call('status') 
-    })
+        call('status'); 
+    });
 }
 
-on('status done', (data) => {
-    console.log(data)
-    render()
+on('status done', () => {
+    render_app();
 })
 
-on('status error', (data) => {
-    console.error(data)
-    render()
+on('status error', () => {
+    render_app();
 })
 
-render()
+render_app();

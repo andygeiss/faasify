@@ -6,28 +6,28 @@
     display: grid;
     grid-template-columns: 1fr;
     justify-content: center;
-    padding: 1rem;
-    margin: 1rem;
+    padding: .5rem;
+    margin: .5rem;
     width: 600px;
 }
 
 .fn-name {
-    background: var(--tertiary);
+    background: var(--secondary);
     border-radius: .5rem;
-    color: var(--on-tertiary);
+    color: var(--on-secondary);
     padding: .5rem;
 }
 
 .fn-stats {
     align-items: center;
-    border: 1px solid var(--tertiary);
+    border: 1px solid var(--secondary);
     border-radius: .5rem;
     color: var(--on-primary);
     display: grid;
     grid-template-columns: 3fr 1fr;
     justify-content: center;
-    padding: 1rem;
-    margin: 1rem;
-    width: 100%;
+    padding: .5rem;
+    margin: .5rem;
+    width: 400px;
 }
 
