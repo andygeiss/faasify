@@ -24,7 +24,7 @@
 
 ## Display the demo page
 
-[http://127.0.0.1:3000/](http://127.0.0.1:3000/)
+[http://127.0.0.1:3000/index](http://127.0.0.1:3000/index)
 
 ## Add functions
 
