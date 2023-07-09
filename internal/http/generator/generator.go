@@ -31,7 +31,6 @@ func (a *generator) Setup() {
 		Functions: entries,
 		Token:     os.Getenv("FAASIFY_TOKEN"),
 	}
-	a.writeTemplate("templates/faasify-js.tmpl", data, wd+"/static/faasify.js")
 	a.writeTemplate("templates/router-go.tmpl", data, wd+"/router.go")
 }
 

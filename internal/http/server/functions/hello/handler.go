@@ -1,9 +1,11 @@
-package status
+package hello
 
-import "net/http"
+import (
+	"net/http"
+)
 
 func HandlerFunc() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(`{"data":{"status":"OK"}}`))
+		w.Write([]byte(`Hello world from Go!`))
 	}
 }

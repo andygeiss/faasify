@@ -62,7 +62,7 @@ func WithEmbeddedFiles(efs embed.FS, prefix string) http.HandlerFunc {
 		mimeType := "text/plain"
 		parts := strings.Split(suffix, ".")
 		for ending, mt := range mimetypes {
-			if ending == parts[1] {
+			if ending == parts[len(parts)-1] {
 				mimeType = mt
 			}
 		}

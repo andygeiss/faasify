@@ -34,14 +34,15 @@ go mod tidy
 
 # Minify and bundle static contents
 rm -f ./static/bundle*
-minify -r -b -o ./static/bundle.js ./static/faasify.js $(find ./static/ -name "*.js" | grep -v faasify)
-minify -r -b -o ./static/bundle.css ./static/*.css
+minify -r -b -o ./static/bundle.js ./static/*.js &>/dev/null
+minify -r -b -o ./static/bundle.css ./static/*.css &>/dev/null
 
 # Copy the bundle
 rm -f ./bundle/*
-cp -f ./static/*.htm* ./bundle/
-cp -f ./static/*.svg ./bundle/
-cp -f ./static/bundle.* ./bundle/
+cp -f ./static/*.htm* ./bundle/ &>/dev/null
+cp -f ./static/*.json ./bundle/ &>/dev/null
+cp -f ./static/*.svg ./bundle/ &>/dev/null
+cp -f ./static/bundle.* ./bundle/ &>/dev/null
 for FILE in $(find ./bundle/ -name "*.*"); do
     gzip -9 ${FILE}
     mv ${FILE}.gz ${FILE}
