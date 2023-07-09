@@ -15,7 +15,7 @@ var embedFS embed.FS
 
 //go:generate go run ../../../cmd/update-functions/main.go
 
-const Token = "wAJt1v8xpVU3olTH0VAf0SpYOa8Y0vXSqiN1JG+3BdQ="
+const Token = "UNyKLhs9GLj4mXVnt1vzXXlLqiZdWV33cm8bf5bLJ3U="
 
 func router() (mux *http.ServeMux) {
 	// Init multiplexer
