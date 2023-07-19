@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-//go:embed content.tmpl
+//go:embed html.tmpl
 var tmpl string
 
 type response struct{}

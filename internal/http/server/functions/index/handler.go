@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-//go:embed index.tmpl
+//go:embed html.tmpl
 var tmpl string
 
 func HandlerFunc(token string) http.HandlerFunc {
