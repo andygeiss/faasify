@@ -15,6 +15,8 @@ func WithAuthentication(next http.HandlerFunc) http.HandlerFunc {
 		// Check for a valid token
 		if parts := strings.Split(r.Header.Get("Authorization"), " "); len(parts) == 2 {
 			if parts[1] == Token {
+				// Add HSTS
+				w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
 				next.ServeHTTP(w, r)
 				return
 			}
