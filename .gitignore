@@ -1,4 +1,5 @@
-build/client
 build/server
+build/server_amd64
+data/*.json
 faasify.dev
 acme_account+key

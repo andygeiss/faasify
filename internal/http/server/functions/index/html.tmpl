@@ -3,12 +3,42 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="bundle.css">
-    <title> Faasify </title>
+    <title> {{ .AppName }} </title>
 </head>
-<body hx-headers='{"Authorization": "Bearer {{ .Token }}"}'> 
-  <script src="bundle.js"></script>
-  <div hx-post="/content" hx-swap="outerHTML" hx-trigger="load"> </div>
+<body> 
+    <style>{{ .Styles }}</style>
+    <f-card id="card-1" cols="2fr 1fr 1fr" rows="1fr 1fr">
+        <f-button icon="search" label=" First "></f-button>
+        <f-bar label="20%" percent="20" size="50px" type="horizontal"></f-bar>
+        <f-bar label="20%" percent="20" size="50px" type="horizontal"></f-bar>
+        <f-button icon="search" label=" Second "></f-button>
+        <f-bar label="80%" percent="80" size="50px" type="vertical"></f-bar>
+        <f-bar label="80%" percent="80" size="50px" type="vertical"></f-bar>
+    </f-card>
+    <f-card id="card-2" cols="1fr 3fr" rows="1fr">
+        <f-table id="table-2-1" cols="1fr 1fr" rows="1fr 1fr 1fr">
+            <f-text value="A"></f-text>
+            <f-number value="1"></f-number>
+            <f-text value="B"></f-text>
+            <f-number value="1.000"></f-number>
+            <f-text icon="info" value="C"></f-text>
+            <f-number icon="info" value="1.000.000"></f-number>
+        </f-table>
+        <f-table id="table-2-2" cols="1fr 1fr 1fr" rows="1fr 1fr 1fr">
+            <f-number value="1"></f-number>
+            <f-number value="2"></f-number>
+            <f-number value="3"></f-number>
+            <f-number value="4"></f-number>
+            <f-number value="5"></f-number>
+            <f-number value="6"></f-number>
+            <f-number value="7"></f-number>
+            <f-number value="8"></f-number>
+            <f-number value="9"></f-number>
+        </f-table>
+    </f-card>
+    <script src="bundle.js"></script>
+    <script>{{ .Script }}</script>
 </body>
 </html>

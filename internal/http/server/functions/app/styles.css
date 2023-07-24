@@ -1,0 +1,37 @@
+:root  {
+    --color-1-bg: #19ecec;
+    --color-1-fg: #6700c6;
+}
+
+/* font */
+body {
+    font-family: Arial;
+    font-size: 14pt;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+/* colors */
+body {
+    background: var(--color-1-bg);
+    color: var(--color-1-fg);
+}
+
+/* layout */
+body {
+    display: grid;
+    grid-template-areas: 
+        "header"
+        "main";
+    grid-template-columns: 1fr;
+    grid-template-rows: 4rem 1fr;
+}
+@media only screen and (min-width: 768px) {
+    body {
+        grid-template-areas:
+            "header header"
+            "main main";
+        grid-template-columns: 1fr 1fr;
+    }
+}
+

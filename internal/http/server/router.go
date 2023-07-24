@@ -5,9 +5,11 @@ import (
 	"embed"
 	"net/http"
 
-	"github.com/andygeiss/faasify/internal/http/server/functions/content"
+	"github.com/andygeiss/faasify/internal/config"
+	"github.com/andygeiss/faasify/internal/http/server/functions/app"
 	"github.com/andygeiss/faasify/internal/http/server/functions/index"
-	"github.com/andygeiss/faasify/internal/http/server/functions/wasm_demo"
+	"github.com/andygeiss/faasify/internal/http/server/functions/manifest"
+	"github.com/andygeiss/faasify/internal/http/server/functions/secure"
 )
 
 //go:embed bundle
@@ -15,23 +17,18 @@ var embedFS embed.FS
 
 //go:generate go run ../../../cmd/update-functions/main.go
 
-var Domain string
-
-const Token = "YY+RkQNl19yUdMLubGOUBvTtAAT+PkDJsxtDHcQAIf8="
-
-var Url string
-
-func router() (mux *http.ServeMux) {
+func router(cfg *config.Config) (mux *http.ServeMux) {
 	// Init multiplexer
 	mux = http.NewServeMux()
 
-	// Add functions
-	mux.HandleFunc("/content", WithAuthentication(WithLogging(WithStatistics(content.HandlerFunc(Token, Domain, Url)))))
-	mux.HandleFunc("/wasm_demo", WithAuthentication(WithLogging(WithStatistics(wasm_demo.HandlerFunc(Token, Domain, Url)))))
+	// Set generated security token
+	cfg.Token = "IMOf4HdpGSpIxaeN+h2DSUhov4qFcrXDUEfzPHjp8DQ="
 
-	// Serve statistics
-	mux.HandleFunc("/index", WithLogging(index.HandlerFunc(Token)))
-	mux.HandleFunc("/stats", WithAuthentication(WithLogging(statsHandler())))
+	// Add functions
+	mux.HandleFunc("/app", WithLogging(app.HandlerFunc(cfg)))
+	mux.HandleFunc("/index", WithLogging(index.HandlerFunc(cfg)))
+	mux.HandleFunc("/manifest", WithLogging(manifest.HandlerFunc(cfg)))
+	mux.HandleFunc("/secure", WithAuthentication(cfg, WithLogging(secure.HandlerFunc(cfg))))
 
 	// Serve embedded files
 	mux.HandleFunc("/", WithEmbeddedFiles(embedFS, "bundle"))

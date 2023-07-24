@@ -65,7 +65,14 @@ func (a *generator) writeTemplate(src string, data any, dst string) {
 		a.err = err
 		return
 	}
-	tmpl, err := template.New("tmpl").Parse(string(content))
+	tmpl, err := template.New("tmpl").Funcs(template.FuncMap{
+		"shouldBeSecure": func(name string) bool {
+			if name != "app" && name != "index" && name != "manifest" {
+				return true
+			}
+			return false
+		},
+	}).Parse(string(content))
 	if err != nil {
 		a.err = err
 		return

@@ -1,0 +1,9 @@
+<svg width="14.565mm" height="14.565mm" version="1.1" viewBox="0 0 14.565 14.565" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(-27.42 -28.428)" stroke-width=".26458">
+    <circle class="icon1" cx="34.703" cy="35.71" r="7.2825" fill="#ffffff"/>
+    <ellipse class="icon2" cx="34.618" cy="38.458" rx="4.7261" ry="3.1746" fill="#c0c0c0"/>
+    <text class="icon3" x="32.974815" y="38.252625" xml:space="preserve">
+      <tspan x="27.974815" y="38.252625" font-size="8pt" stroke-width=".26458" stroke="#000000"> f </tspan>
+    </text>
+  </g >
+</svg>

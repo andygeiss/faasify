@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" href="logo.svg" type="image/svg+xml">
+    <link rel="manifest" href="manifest">
+    <link rel="stylesheet" href="bundle.css">
+    <title> {{ .AppName }} </title>
+</head>
+<body> 
+    <style> {{ .Styles }} </style>
+    <header> 
+        <h1> {{ .AppName }} </h1>
+    </header>
+    <main>
+        <button id="btn-secure"> test security </button>
+        <div id="div-secure"></div>
+    </main>
+    <script src="bundle.js"></script>
+    <script> config.headers["Authorization"] = "Bearer {{ .Token }}"; {{ .Script }} </script>
+</body>
+</html>
