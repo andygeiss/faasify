@@ -6,7 +6,7 @@
 
 ## Run the server in development mode
 
-    sudo ./build/server -url http://localhost
+    sudo ./build/server -domain localhost -url http://localhost
 
 ## Call a function with curl and security token
 
