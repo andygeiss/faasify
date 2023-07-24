@@ -30,7 +30,16 @@ func ListenAndServe(domain, mode, url string) error {
 		}
 		srv.Addr = ":443"
 		srv.TLSConfig = &tls.Config{
-			GetCertificate: certManager.GetCertificate,
+			CipherSuites: []uint16{
+				tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+				tls.TLS_RSA_WITH_AES_256_CBC_SHA,
+				tls.TLS_RSA_WITH_AES_256_GCM_SHA384,
+				tls.TLS_RSA_WITH_AES_256_CBC_SHA,
+			},
+			CurvePreferences:         []tls.CurveID{tls.CurveP521, tls.CurveP384, tls.CurveP256},
+			GetCertificate:           certManager.GetCertificate,
+			MinVersion:               tls.VersionTLS12,
+			PreferServerCipherSuites: true,
 		}
 		go http.ListenAndServe(":80", certManager.HTTPHandler(nil))
 		return srv.ListenAndServeTLS("", "")
