@@ -7,7 +7,6 @@ import (
 
 	"github.com/andygeiss/faasify/internal/http/server/functions/content"
 	"github.com/andygeiss/faasify/internal/http/server/functions/index"
-	"github.com/andygeiss/faasify/internal/http/server/functions/wasm_demo"
 )
 
 //go:embed bundle
@@ -17,7 +16,7 @@ var embedFS embed.FS
 
 var Domain string
 
-const Token = "RGYevYtm6eqCRTff5OkQ/4EuNmYccynrLNg0GFpEa+8="
+const Token = "maEv3mo2sVvP55iPm/H7JvpGxh5WgY0uZE4EswroKoI="
 
 var Url string
 
@@ -27,7 +26,6 @@ func router() (mux *http.ServeMux) {
 
 	// Add functions
 	mux.HandleFunc("/content", WithAuthentication(WithLogging(WithStatistics(content.HandlerFunc(Token, Domain, Url)))))
-	mux.HandleFunc("/wasm_demo", WithAuthentication(WithLogging(WithStatistics(wasm_demo.HandlerFunc(Token, Domain, Url)))))
 
 	// Serve statistics
 	mux.HandleFunc("/index", WithLogging(index.HandlerFunc(Token)))
