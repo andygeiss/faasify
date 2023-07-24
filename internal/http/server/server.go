@@ -15,7 +15,7 @@ func ListenAndServe(domain, mode, url string) error {
 	// Create a custom http.Server with timeouts
 	srv := &http.Server{
 		Addr:         ":80",
-		Handler:      http.TimeoutHandler(router(), time.Second*5, ""),
+		Handler:      http.TimeoutHandler(router(), 10*time.Second, ""),
 		IdleTimeout:  120 * time.Second,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
