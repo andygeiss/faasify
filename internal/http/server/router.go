@@ -5,9 +5,10 @@ import (
 	"embed"
 	"net/http"
 
-	"github.com/andygeiss/faasify/internal/http/server/functions/content"
+	"github.com/andygeiss/faasify/internal/config"
+	"github.com/andygeiss/faasify/internal/http/server/functions/hello"
 	"github.com/andygeiss/faasify/internal/http/server/functions/index"
-	"github.com/andygeiss/faasify/internal/http/server/functions/wasm_demo"
+	"github.com/andygeiss/faasify/internal/http/server/functions/private"
 )
 
 //go:embed bundle
@@ -15,23 +16,21 @@ var embedFS embed.FS
 
 //go:generate go run ../../../cmd/update-functions/main.go
 
-var Domain string
-
-const Token = "YY+RkQNl19yUdMLubGOUBvTtAAT+PkDJsxtDHcQAIf8="
-
-var Url string
-
-func router() (mux *http.ServeMux) {
+func router(cfg *config.Config) (mux *http.ServeMux) {
 	// Init multiplexer
 	mux = http.NewServeMux()
 
-	// Add functions
-	mux.HandleFunc("/content", WithAuthentication(WithLogging(WithStatistics(content.HandlerFunc(Token, Domain, Url)))))
-	mux.HandleFunc("/wasm_demo", WithAuthentication(WithLogging(WithStatistics(wasm_demo.HandlerFunc(Token, Domain, Url)))))
+	// Set generated security token
+	cfg.Token = "miTV9J5IU5bCJ75ebmihlFzNw2s4gOcA74TM9UZfC9M="
+	cfg.AccountAccess.CreateAccount("faasify", "f44s1fy")
 
-	// Serve statistics
-	mux.HandleFunc("/index", WithLogging(index.HandlerFunc(Token)))
-	mux.HandleFunc("/stats", WithAuthentication(WithLogging(statsHandler())))
+	// Add functions
+	mux.HandleFunc("/hello", WithAuthentication(cfg, WithLogging(hello.HandlerFunc(cfg))))
+
+	mux.HandleFunc("/private", WithAuthentication(cfg, WithLogging(private.HandlerFunc(cfg))))
+
+	// Unsecure per default
+	mux.HandleFunc("/index", WithLogging(index.HandlerFunc(cfg)))
 
 	// Serve embedded files
 	mux.HandleFunc("/", WithEmbeddedFiles(embedFS, "bundle"))

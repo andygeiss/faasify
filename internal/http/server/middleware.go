@@ -6,20 +6,30 @@ import (
 	"net/http"
 	"path/filepath"
 	"strings"
-	"time"
+
+	"github.com/andygeiss/faasify/internal/config"
 )
 
-// WithAuthentication checks for a valid API token
-func WithAuthentication(next http.HandlerFunc) http.HandlerFunc {
+// WithAuthentication checks for a valid token
+func WithAuthentication(cfg *config.Config, next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// Check for a valid token
 		if parts := strings.Split(r.Header.Get("Authorization"), " "); len(parts) == 2 {
-			if parts[1] == Token {
+			// Check for the admin token first
+			if cfg.Token == parts[1] {
+				w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
+				next.ServeHTTP(w, r)
+				return
+			}
+			// Check the account tokens
+			id, secret, ok := r.BasicAuth()
+			if ok && cfg.AccountAccess.VerifyAccount(id, secret) {
+				w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
 				next.ServeHTTP(w, r)
 				return
 			}
 		}
 		// Handle unauthorized access
+		w.Header().Set("WWW-Authenticate", `Basic realm="restricted", charset="UTF-8"`)
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 	}
 }
@@ -83,18 +93,5 @@ func WithLogging(next http.HandlerFunc) http.HandlerFunc {
 		log.Printf("[%-20s] requests [%-20s]", r.RemoteAddr, r.RequestURI)
 		// Delegate to the next handler
 		next.ServeHTTP(w, r)
-	}
-}
-
-func WithStatistics(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		name := r.RequestURI
-		start := time.Now()
-		// Add pre function statistics
-		stats.updatePreStats(name)
-		// Delegate to the next handler
-		next.ServeHTTP(w, r)
-		// Add post function statistics
-		stats.updatePostStats(name, start)
 	}
 }

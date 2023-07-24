@@ -1,1 +1,0 @@
-export FAASIFY_TOKEN="TOKEN"

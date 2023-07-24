@@ -1,0 +1,174 @@
+:root  {
+    --color-body-bg:    var(--color-gray-3);
+    --color-body-fg:    var(--color-white);
+    --color-header-bg:  var(--color-white);
+    --color-header-fg:  var(--color-gray-0); 
+    --color-main-bg:    var(--color-white);
+    --color-main-fg:    var(--color-gray-0);
+    --color-nav-bg:     var(--color-white);
+    --color-nav-fg:     var(--color-gray-0);
+
+    --color-action:     var(--color-4);
+    --color-focus:      var(--color-3);
+
+    --color-black:      rgb(0, 0, 0);
+    --color-gray-0:     rgb(67, 67, 67);
+    --color-gray-1:     rgb(127, 127, 127);
+    --color-gray-2:     rgb(227, 227, 227);
+    --color-gray-3:     rgb(247, 247, 247);
+    --color-white:      rgb(255, 255, 255);
+
+    --color-1:          rgb(160, 160, 160);
+    --color-2:          rgb(212, 242, 245);
+    --color-3:          rgb(10, 90, 225);
+    --color-4:          rgb(0, 0, 100);
+    --color-5:          rgb(250, 155, 80);
+    --color-6:          rgb(255, 90, 70);
+}
+
+body {
+    background: var(--color-body-bg);
+    color: var(--color-body-fg);
+    display: grid;
+    font-size: 14pt;
+    font-weight: 400;
+    grid-template-areas: 
+        "header nav"
+        "main   main";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 4rem 1fr;
+    height: 100%;
+    left: 0;
+    line-height: 18px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+form {
+    background: var(--color-main-bg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    color: var(--color-main-fg);
+    border-radius: .5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    width: 300px;
+}
+
+form input {
+    background: var(--color-gray-2);
+    border: 1px solid var(--color-gray-2);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: var(--color-main-fg);
+    display: inherit;
+    line-height: 2.5rem;
+}
+
+form input:hover {
+    background: var(--color-white);
+    border: 1px solid var(--color-focus);
+}
+
+form input[type=text], main form input[type=password] {
+    padding: 1rem 0 0 .5rem;
+    width: 100%;
+}
+
+form input[type=submit] {
+    background: var(--color-action);
+    border: 1px solid var(--color-action);
+    color: var(--color-white);
+    margin-top: 1rem;
+}
+
+form input[type=submit]:hover {
+    background: var(--color-focus);
+    border: 1px solid var(--color-focus);
+}
+
+form label:hover {
+    color: var(--color-focus);
+}
+
+form span {
+    font-size: 65%;
+    left: .5rem;
+    position: relative;
+    top: 1.5rem;
+}
+
+.icon1 {
+    fill: var(--color-header-bg);
+}
+
+.icon2 {
+    fill: var(--color-header-fg);
+}
+
+.icon3 {
+    fill: var(--color-header-fg);
+}
+
+header {
+    align-items: center;
+    background: var(--color-header-bg);
+    border-bottom: 1px solid var(--color-gray-2);
+    color: var(--color-header-fg);
+    cursor: default;
+    display: flex;
+    grid-area: header;
+}
+
+header span {
+    font-size: 120%;
+    font-weight: bold;
+    margin: 0 1rem 0 1rem;
+}
+
+header svg {
+    height: 2rem;
+    width: 2rem;
+    margin: 0 0 0 .5rem;
+}
+
+main {
+    align-items: center;
+    background: var(--color-main-bg);
+    color: var(--color-main-fg);
+    display: flex;
+    grid-area: main;
+    margin: auto;
+}
+
+nav {
+    align-items: center;
+    background: var(--color-nav-bg);
+    border-bottom: 1px solid var(--color-gray-2);
+    color: var(--color-nav-fg);
+    display: flex;
+    flex-direction: row-reverse;
+    grid-area: nav;
+}
+
+nav a {
+    align-items: center;
+    color: var(--color-nav-fg);
+    display: flex;
+}
+
+nav span {
+    border-bottom: 2px solid var(--color-nav-bg);
+    padding: .5rem 0;
+    margin: 0 1rem 0 0;
+}
+
+nav span:hover {
+    border-bottom: 2px solid var(--color-focus);
+}
+
+nav svg {
+    cursor: default;
+    width: 3rem;
+}

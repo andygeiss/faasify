@@ -1,7 +1,5 @@
 #!/bin/bash
 
-CLIENT_SOURCE="./cmd/client/main.go"
-CLIENT_TARGET="./build/client"
 SERVER_SOURCE="./cmd/server/main.go"
 SERVER_TARGET="./build/server"
 
@@ -27,13 +25,6 @@ if [ ! "${MODULE_OLD}" == "${MODULE_NEW}" ]; then
         sed -i 's|'${MODULE_OLD}'|'${MODULE_NEW}'|g' $FILE
     done
 fi
-# Initialize git
-if [ ! -d ".git" ]; then
-    git init
-    git add .
-    git commit -m "initial commit" .
-    git tag ${VERSION_INITIAL}
-fi
 
 mkdir -p "./build"
 
@@ -49,6 +40,7 @@ minify -r -b -o ./static/bundle.css ./static/*.css &>/dev/null
 # Copy the bundle
 rm -f ./bundle/*
 cp -f ./static/*.htm* ./bundle/ &>/dev/null
+cp -f ./static/*.ico ./bundle/ &>/dev/null
 cp -f ./static/*.json ./bundle/ &>/dev/null
 cp -f ./static/*.svg ./bundle/ &>/dev/null
 cp -f ./static/bundle.* ./bundle/ &>/dev/null
@@ -61,11 +53,7 @@ export CGO_ENABLED=0
 FAASIFY_TOKEN=${TOKEN} go build -ldflags "\
     -s -w" \
     -o ${SERVER_TARGET} ${SERVER_SOURCE}
-FAASIFY_TOKEN=${TOKEN} go build -ldflags "\
-    -s -w" \
-    -o ${CLIENT_TARGET} ${CLIENT_SOURCE}
 
 # Minify binary
-upx ${CLIENT_TARGET}
 upx ${SERVER_TARGET}
 

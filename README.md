@@ -6,19 +6,23 @@
 
 ## Run the server in development mode
 
-    sudo ./build/server
+Use the default (domain=localhost, url=http://localhost:3000)
+
+    ./build/server 
+
+Or specify the domain and url with args:
+
+    ./build/server -domain localhost -url http://localhost:3000
 
 ## Call a function with curl and security token
 
-    curl -H "Authorization: Bearer $(cat ./security/token)" http://127.0.0.1/status
-
-## Call a function with faasify client and buildin token
-
-    ./build/client -host http://127.0.0.1 -name status
+    curl -H "Authorization: Bearer $(cat ./security/token)" http://localhost:3000/hello
 
 ## Display the demo page
 
-[http://127.0.0.1/index](http://127.0.0.1/index)
+[http://127.0.0.1:3000/index](http://127.0.0.1:3000/index)
+
+Login with the username <code>faasify</code> and the security token in <code>security/token</code> as the password.
 
 ## Add functions
 
