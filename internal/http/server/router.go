@@ -17,7 +17,7 @@ var embedFS embed.FS
 
 var Domain string
 
-const Token = "wHg2B+BPLlWuv15CAgBJe07KDPkBAGk+wEEXG7vs5Qk="
+const Token = "0p55AY366wdHOxpj6zM7q8ZWei97JbYCuufLy977iEc="
 
 var Url string
 
