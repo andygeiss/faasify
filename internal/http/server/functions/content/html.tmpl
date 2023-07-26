@@ -1,10 +1,11 @@
 <div id="content">
+    <style>{{ .Styles }}</style>
     <div class="content-nav">
         <form hx-post="/content" hx-target="#content">
             <button> refresh </button>
         </form>
     </div>
-    {{ range $key, $obj := . }}
+    {{ range $key, $obj := .Data }}
     <div class="content-row">
         <div class="content-column">
             <span> {{ $key }} </span>

@@ -7,11 +7,19 @@ import (
 )
 
 //go:embed html.tmpl
-var tmpl string
+var html string
+
+//go:embed styles.css
+var styles string
+
+type response struct {
+	Styles template.CSS
+	Token  string
+}
 
 func HandlerFunc(token string) http.HandlerFunc {
-	t, _ := template.New("t").Parse(tmpl)
+	t, _ := template.New("t").Funcs(template.FuncMap{}).Parse(html)
 	return func(w http.ResponseWriter, r *http.Request) {
-		t.Execute(w, struct{ Token string }{Token: token})
+		t.Execute(w, response{template.CSS(styles), token})
 	}
 }

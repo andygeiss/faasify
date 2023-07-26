@@ -9,12 +9,18 @@ import (
 )
 
 //go:embed html.tmpl
-var tmpl string
+var html string
 
-type response struct{}
+//go:embed styles.css
+var styles string
+
+type response struct {
+	Data   map[string]any
+	Styles template.CSS
+}
 
 func HandlerFunc(token, domain, url string) http.HandlerFunc {
-	t, _ := template.New("t").Funcs(template.FuncMap{}).Parse(tmpl)
+	t, _ := template.New("t").Funcs(template.FuncMap{}).Parse(html)
 	return func(w http.ResponseWriter, r *http.Request) {
 		client := http.Client{}
 		req, err := http.NewRequest("POST", url+"/stats", nil)
@@ -31,6 +37,6 @@ func HandlerFunc(token, domain, url string) http.HandlerFunc {
 		if err := json.NewDecoder(res.Body).Decode(&data); err != nil {
 			log.Printf("error during json.Decode: %v", err)
 		}
-		t.Execute(w, data)
+		t.Execute(w, response{data, template.CSS(styles)})
 	}
 }

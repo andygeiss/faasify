@@ -8,7 +8,8 @@
     <title> Faasify </title>
 </head>
 <body hx-headers='{"Authorization": "Bearer {{ .Token }}"}'> 
-  <script src="bundle.js"></script>
-  <div hx-post="/content" hx-swap="outerHTML" hx-trigger="load"> </div>
+    <script src="bundle.js"></script>
+    <style>{{ .Styles }}</style>
+    <div hx-post="/content" hx-swap="outerHTML" hx-trigger="load"> </div>
 </body>
 </html>

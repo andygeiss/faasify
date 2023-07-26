@@ -24,8 +24,8 @@ func router() (mux *http.ServeMux) {
     {{ range .Functions }}{{ if ne . "index" }}mux.HandleFunc("/{{ . }}", WithAuthentication(WithLogging(WithStatistics({{ . }}.HandlerFunc(Token, Domain, Url)))))
     {{ end }}{{ end }}
     // Serve statistics
-    mux.HandleFunc("/index", WithLogging(index.HandlerFunc(Token)))
-    mux.HandleFunc("/stats", WithAuthentication(WithLogging(statsHandler())))
+    mux.HandleFunc("/index", WithLogging(WithStatistics(index.HandlerFunc(Token))))
+    mux.HandleFunc("/stats", WithAuthentication(WithLogging(WithStatistics(statsHandler()))))
 
     // Serve embedded files
     mux.HandleFunc("/", WithEmbeddedFiles(embedFS, "bundle"))
