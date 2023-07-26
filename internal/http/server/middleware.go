@@ -1,6 +1,8 @@
 package server
 
 import (
+	"crypto/sha256"
+	"crypto/subtle"
 	"embed"
 	"log"
 	"net/http"
@@ -14,14 +16,29 @@ func WithAuthentication(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Check for a valid token
 		if parts := strings.Split(r.Header.Get("Authorization"), " "); len(parts) == 2 {
+			// Token-based Authentication
 			if parts[1] == Token {
-				// Add HSTS
 				w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
 				next.ServeHTTP(w, r)
 				return
 			}
+			// Basic Authentication (we still use the Token as password)
+			if user, pass, ok := r.BasicAuth(); ok {
+				userHash := sha256.Sum256([]byte(user))
+				passHash := sha256.Sum256([]byte(pass))
+				expectedUserHash := sha256.Sum256([]byte("faasify"))
+				expectedPassHash := sha256.Sum256([]byte(Token))
+				userMatch := (subtle.ConstantTimeCompare(userHash[:], expectedUserHash[:]) == 1)
+				passMatch := (subtle.ConstantTimeCompare(passHash[:], expectedPassHash[:]) == 1)
+				if userMatch && passMatch {
+					w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
+					next.ServeHTTP(w, r)
+					return
+				}
+			}
 		}
 		// Handle unauthorized access
+		w.Header().Set("WWW-Authenticate", `Basic realm="restricted", charset="UTF-8"`)
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 	}
 }

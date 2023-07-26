@@ -20,6 +20,8 @@
 
 [http://127.0.0.1/index](http://127.0.0.1/index)
 
+Login with the username <code>faasify</code> and the security token in <code>security/token</code> as the password.
+
 ## Add functions
 
 Create a new function named <code>YOUR_FUNCTION</code>:

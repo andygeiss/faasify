@@ -16,7 +16,7 @@ var embedFS embed.FS
 
 var Domain string
 
-const Token = "1Q21DS5AhtOU8jTyFpi3+80j/NikzUTxLl76E8p/63o="
+const Token = "XoBpMpSjzdojiK+rNyS7kd0WRzBouzEafRJr2vq7Od8="
 
 var Url string
 
@@ -28,7 +28,7 @@ func router() (mux *http.ServeMux) {
 	mux.HandleFunc("/content", WithAuthentication(WithLogging(WithStatistics(content.HandlerFunc(Token, Domain, Url)))))
 
 	// Serve statistics
-	mux.HandleFunc("/index", WithLogging(WithStatistics(index.HandlerFunc(Token))))
+	mux.HandleFunc("/index", WithAuthentication(WithLogging(WithStatistics(index.HandlerFunc(Token)))))
 	mux.HandleFunc("/stats", WithAuthentication(WithLogging(WithStatistics(statsHandler()))))
 
 	// Serve embedded files
