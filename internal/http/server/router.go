@@ -21,16 +21,12 @@ func router(cfg *config.Config) (mux *http.ServeMux) {
 	mux = http.NewServeMux()
 
 	// Set generated security token
-	cfg.Token = "miTV9J5IU5bCJ75ebmihlFzNw2s4gOcA74TM9UZfC9M="
-	cfg.AccountAccess.CreateAccount("faasify", "f44s1fy")
+	cfg.Token = "ydY7Yva7mCC+B0R6swHGe9nc8l1/C1awxUuw0wJPCBc="
 
 	// Add functions
 	mux.HandleFunc("/hello", WithAuthentication(cfg, WithLogging(hello.HandlerFunc(cfg))))
-
-	mux.HandleFunc("/private", WithAuthentication(cfg, WithLogging(private.HandlerFunc(cfg))))
-
-	// Unsecure per default
 	mux.HandleFunc("/index", WithLogging(index.HandlerFunc(cfg)))
+	mux.HandleFunc("/private", WithAuthentication(cfg, WithLogging(private.HandlerFunc(cfg))))
 
 	// Serve embedded files
 	mux.HandleFunc("/", WithEmbeddedFiles(embedFS, "bundle"))

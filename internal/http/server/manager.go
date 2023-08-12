@@ -58,6 +58,8 @@ func (a *Manager) ListenAndServe() {
 		go http.ListenAndServe(":3000", certManager.HTTPHandler(nil))
 		err = srv.ListenAndServeTLS("", "")
 	default:
+		// create a default user in development mode
+		a.cfg.AccountAccess.CreateAccount("faasify", a.cfg.Token)
 		err = srv.ListenAndServe()
 	}
 	if err != nil {
@@ -67,6 +69,11 @@ func (a *Manager) ListenAndServe() {
 
 func (a *Manager) WithAccountAccess(accountAccess account.Access) *Manager {
 	a.cfg.AccountAccess = accountAccess
+	return a
+}
+
+func (a *Manager) WithAppName(appName string) *Manager {
+	a.cfg.AppName = appName
 	return a
 }
 
