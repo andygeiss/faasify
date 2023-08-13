@@ -41,6 +41,7 @@ func HandlerFunc(cfg *config.Config) http.HandlerFunc {
 		json.NewDecoder(bytes.NewReader(manifest)).Decode(&res)
 		res.Name = cfg.AppName
 		res.ShortName = cfg.AppName
+		res.StartUrl = cfg.Url + "/app"
 		json.NewEncoder(gw).Encode(res)
 	}
 }
