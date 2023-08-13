@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" href="logo.svg" type="image/svg+xml">
+    <link rel="manifest" href="manifest">
+    <link rel="stylesheet" href="bundle.css">
+    <title> {{ .AppName }} </title>
+</head>
+<body hx-headers='{"Authorization": "Bearer {{ .Token }}"}'> 
+    <script src="bundle.js"></script>
+    <script> {{ .Script }} </script>
+    <style> {{ .Styles }} </style>
+    <header> 
+        <h1> {{ .AppName }} </h1>
+    </header>
+</body>
+</html>

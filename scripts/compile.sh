@@ -42,6 +42,7 @@ rm -f ./bundle/*
 cp -f ./static/*.htm* ./bundle/ &>/dev/null
 cp -f ./static/*.ico ./bundle/ &>/dev/null
 cp -f ./static/*.json ./bundle/ &>/dev/null
+cp -f ./static/*.png ./bundle/ &>/dev/null
 cp -f ./static/*.svg ./bundle/ &>/dev/null
 cp -f ./static/bundle.* ./bundle/ &>/dev/null
 for FILE in $(find ./bundle/ -name "*.*"); do
