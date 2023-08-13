@@ -26,6 +26,7 @@ type response struct {
 	Icons           []icon `json:"icons"`
 	Name            string `json:"name"`
 	Orientation     string `json:"orientation"`
+	Scope           string `json:"scope"`
 	ShortName       string `json:"short_name"`
 	StartUrl        string `json:"start_url"`
 	ThemeColor      string `json:"theme_color"`
@@ -40,8 +41,9 @@ func HandlerFunc(cfg *config.Config) http.HandlerFunc {
 		var res response
 		json.NewDecoder(bytes.NewReader(manifest)).Decode(&res)
 		res.Name = cfg.AppName
+		res.Scope = "/app"
 		res.ShortName = cfg.AppName
-		res.StartUrl = cfg.Url + "/app"
+		res.StartUrl = "/app"
 		json.NewEncoder(gw).Encode(res)
 	}
 }

@@ -25,6 +25,7 @@
     ],
     "name": "faasify",
     "orientation": "portrait",
+    "scope": "/app",
     "short_name": "faasify",
     "start_url": "/app",
     "theme_color": "#000000"
