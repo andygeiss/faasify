@@ -12,7 +12,7 @@ func main() {
 	appName := flag.String("app.name", "faasify", "your app name")
 	domain := flag.String("domain", "localhost", "your.domain")
 	mode := flag.String("mode", "development", "development|production")
-	url := flag.String("url", "http://localhost:3000", "remote server url")
+	url := flag.String("url", "https://localhost:3000", "remote server url")
 	flag.Parse()
 	accountAccess := account.NewFileAccess("data/accounts.json")
 	accountAccess.CreateAccount("asdf", "asdf")
