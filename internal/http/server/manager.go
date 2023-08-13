@@ -34,7 +34,7 @@ func (a *Manager) ListenAndServe() {
 	// Run the server
 	var err error
 	switch a.cfg.Mode {
-	case "prod":
+	case "production":
 		certManager := autocert.Manager{
 			Cache:      autocert.DirCache("."),
 			HostPolicy: autocert.HostWhitelist(a.cfg.Domain),

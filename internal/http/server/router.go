@@ -6,9 +6,7 @@ import (
 	"net/http"
 
 	"github.com/andygeiss/faasify/internal/config"
-	"github.com/andygeiss/faasify/internal/http/server/functions/hello"
 	"github.com/andygeiss/faasify/internal/http/server/functions/index"
-	"github.com/andygeiss/faasify/internal/http/server/functions/private"
 )
 
 //go:embed bundle
@@ -21,12 +19,10 @@ func router(cfg *config.Config) (mux *http.ServeMux) {
 	mux = http.NewServeMux()
 
 	// Set generated security token
-	cfg.Token = "ydY7Yva7mCC+B0R6swHGe9nc8l1/C1awxUuw0wJPCBc="
+	cfg.Token = "DtJ7YgbXGy4gR48vg/BmRXtNX7LXXKBQO8tWNOJskUY="
 
 	// Add functions
-	mux.HandleFunc("/hello", WithAuthentication(cfg, WithLogging(hello.HandlerFunc(cfg))))
 	mux.HandleFunc("/index", WithLogging(index.HandlerFunc(cfg)))
-	mux.HandleFunc("/private", WithAuthentication(cfg, WithLogging(private.HandlerFunc(cfg))))
 
 	// Serve embedded files
 	mux.HandleFunc("/", WithEmbeddedFiles(embedFS, "bundle"))
