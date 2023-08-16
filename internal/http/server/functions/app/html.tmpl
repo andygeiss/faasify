@@ -8,12 +8,16 @@
     <link rel="stylesheet" href="bundle.css">
     <title> {{ .AppName }} </title>
 </head>
-<body hx-headers='{"Authorization": "Bearer {{ .Token }}"}'> 
+<body> 
     <script src="bundle.js"></script>
-    <script> {{ .Script }} </script>
     <style> {{ .Styles }} </style>
     <header> 
         <h1> {{ .AppName }} </h1>
     </header>
+    <main>
+        <button id="btn-secure"> test security </button>
+        <div id="div-secure"></div>
+    </main>
+    <script> config.headers["Authorization"] = "Bearer {{ .Token }}"; {{ .Script }} </script>
 </body>
 </html>

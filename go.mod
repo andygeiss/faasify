@@ -1,6 +1,6 @@
 module github.com/andygeiss/faasify
 
-go 1.20
+go 1.21.0
 
 require golang.org/x/crypto v0.12.0
 

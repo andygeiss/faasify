@@ -60,7 +60,7 @@ func (a *Manager) ListenAndServe() {
 	default:
 		// create a default user in development mode
 		a.cfg.AccountAccess.CreateAccount("faasify", a.cfg.Token)
-		err = srv.ListenAndServeTLS("data/localhost.crt", "data/localhost.key")
+		err = srv.ListenAndServe()
 	}
 	if err != nil {
 		a.err = err
