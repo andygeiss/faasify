@@ -15,7 +15,6 @@ func main() {
 	url := flag.String("url", "https://localhost:3000", "remote server url")
 	flag.Parse()
 	accountAccess := account.NewFileAccess("data/accounts.json")
-	accountAccess.CreateAccount("asdf", "asdf")
 	srv := server.NewManager().
 		WithAccountAccess(accountAccess).
 		WithAppName(*appName).
