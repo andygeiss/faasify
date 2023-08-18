@@ -1,5 +1,9 @@
+const $ = (sel) => {
+    return document.querySelector(sel)
+};
+
 const bind = (sel, evt, fn) => {
-    query(sel).addEventListener(evt, fn)
+    $(sel).addEventListener(evt, fn)
 };
 
 const call = (name, data) => {
@@ -30,6 +34,3 @@ const on = (evt, fn) => {
     window.addEventListener(evt, (e) => { fn(e.detail.output) })
 };
 
-const query = (sel) => {
-    return document.querySelector(sel)
-};

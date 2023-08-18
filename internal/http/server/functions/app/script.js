@@ -1,9 +1,9 @@
 
 bind("#btn-secure", "click", () => {
-    call("secure", {})
+    call("secure", {});
 });
 
 on("secure done", (data) => {
-    query("#div-secure").innerHTML = JSON.stringify(data)
+    $("#div-secure").innerHTML = JSON.stringify(data);
 });
 
