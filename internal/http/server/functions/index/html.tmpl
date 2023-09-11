@@ -9,34 +9,43 @@
 </head>
 <body> 
     <style>{{ .Styles }}</style>
-    <f-card id="card-1" cols="2fr 1fr 1fr" rows="1fr 1fr">
+    <f-card id="card-1" cols="1fr">
+        <f-title value="Button"></f-title>
+        <f-text value=""></f-text>
         <f-button icon="search" label=" First "></f-button>
+        <f-title value="Bar"></f-title>
         <f-bar label="20%" percent="20" size="50px" type="horizontal"></f-bar>
-        <f-bar label="20%" percent="20" size="50px" type="horizontal"></f-bar>
-        <f-button icon="search" label=" Second "></f-button>
-        <f-bar label="80%" percent="80" size="50px" type="vertical"></f-bar>
         <f-bar label="80%" percent="80" size="50px" type="vertical"></f-bar>
     </f-card>
-    <f-card id="card-2" cols="1fr 3fr" rows="1fr">
-        <f-table id="table-2-1" cols="1fr 1fr" rows="1fr 1fr 1fr">
+    <f-card id="card-2" cols="1fr">
+        <f-title value="Table"></f-title>
+        <f-text value=""></f-text>
+        <f-table id="table-2-1" cols="1fr">
+            <f-text value="Text"></f-text>
             <f-text value="A"></f-text>
-            <f-number value="1"></f-number>
             <f-text value="B"></f-text>
-            <f-number value="1.000"></f-number>
             <f-text icon="info" value="C"></f-text>
-            <f-number icon="info" value="1.000.000"></f-number>
         </f-table>
-        <f-table id="table-2-2" cols="1fr 1fr 1fr" rows="1fr 1fr 1fr">
+        <f-table id="table-2-2" cols="1fr 1fr 1fr">
+            <f-text value="Number"></f-text>
+            <f-text value=""></f-text>
+            <f-text value=""></f-text>
             <f-number value="1"></f-number>
             <f-number value="2"></f-number>
             <f-number value="3"></f-number>
-            <f-number value="4"></f-number>
-            <f-number value="5"></f-number>
-            <f-number value="6"></f-number>
-            <f-number value="7"></f-number>
-            <f-number value="8"></f-number>
-            <f-number value="9"></f-number>
+            <f-number value="40"></f-number>
+            <f-number value="500"></f-number>
+            <f-number value="6.000"></f-number>
+            <f-number value="70.000"></f-number>
+            <f-number value="800.000"></f-number>
+            <f-number value="9.000.00"></f-number>
         </f-table>
+    </f-card>
+    <f-card id="card-3" cols="1fr">
+        <f-input-search id="search-1" label="Search"></f-input-search>
+        <f-input-password id="password-1" label="Password"></f-input-password>
+        <f-input-text icon="edit" id="text-name" label="Text Name"></f-input-text>
+        <f-input-text icon="info" id="text-disabled" label="Text disabled" value="Cannot be changed" disabled></f-input-text>
     </f-card>
     <script src="bundle.js"></script>
     <script>{{ .Script }}</script>

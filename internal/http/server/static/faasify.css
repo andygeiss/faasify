@@ -41,6 +41,7 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 h1, h2 {
@@ -57,10 +58,19 @@ h2 {
     font-size: 110%;
 }
 
+.disabled {
+    background: unset !important;
+    box-shadow: unset !important;
+    cursor: auto !important;
+}
+
 /* faasify components */
 f-bar,
 f-button,
 f-card,
+f-input-password,
+f-input-search,
+f-input-text,
 f-table {
     align-items: center;
     background: var(--color-primary);
@@ -84,7 +94,10 @@ f-bar {
 
 f-button {
     cursor: pointer;
-    padding: calc(var(--padding) / 2);
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    padding: calc(var(--padding) / 2) var(--padding);
+    width: max-content;
 }
 
 f-button span {
@@ -96,15 +109,48 @@ f-button:hover {
 }
 
 f-number,
-f-text {
+f-text,
+f-input-password,
+f-input-search,
+f-input-text,
+f-title {
     align-items: center;
     display: flex;
 }
 
+f-input-password,
+f-input-search,
+f-input-text,
 f-table {
     box-shadow: unset;
     margin: calc(var(--margin) / 2);
     padding: calc(var(--padding) / 2);
+}
+
+f-input-password,
+f-input-search,
+f-input-text {
+    margin: var(--margin);
+    margin-top: calc(2*var(--margin));
+}
+
+f-input-password label,
+f-input-search label,
+f-input-text label {
+    font-size: 80%;
+    margin-top: -80px;
+    position: absolute;
+}
+
+f-input-password span,
+f-input-search span,
+f-input-text span {
+    position: absolute;
+    margin-left: 8px;
+}
+
+f-text {
+    text-align: left;
 }
 
 .f-bar-h {
@@ -133,6 +179,9 @@ f-table {
 }
 
 .f-number,
+.f-input-password,
+.f-input-search,
+.f-input-text,
 .f-text {
     padding: calc(var(--padding) / 2);
     width: 100%;
@@ -142,6 +191,18 @@ f-table {
     text-align: right;
 }
 
-.f-text {
-    text-align: left;
+.f-input-password,
+.f-input-search,
+.f-input-text {
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-inset);
+    color: var(--color-accent);
+    padding-left: 40px;
 }
+
+.f-title {
+    color: var(--color-accent);
+    font-size: 140%;
+    margin: var(--margin);
+}
+

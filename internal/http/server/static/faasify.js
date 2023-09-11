@@ -112,6 +112,95 @@ class FaasifyCard extends HTMLElement {
     }
 }
 
+class FaasifyInputPassword extends HTMLElement {
+    constructor() {
+        super();
+    }
+    connectedCallback() {
+        this.render();
+    }
+    static get observedAttributes() {
+        return ['id', 'label'];
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+        this.render();
+    }
+    render() {
+        let kv = attr(this);
+        let label = '';
+        let iid = `input-${kv.id}`;
+        let icon = `<span class="material-symbols-outlined">key</span>`;
+        if ('label' in kv) {
+            label = `<label for="${iid}">${kv.label}</label>`
+        }
+        let input = `<input id="${iid}" class="f-input-text" type="password"></input>`;
+        this.innerHTML = `${label}${icon}${input}`;
+    }
+}
+
+class FaasifyInputSearch extends HTMLElement {
+    constructor() {
+        super();
+    }
+    connectedCallback() {
+        this.render();
+    }
+    static get observedAttributes() {
+        return ['id', 'label'];
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+        this.render();
+    }
+    render() {
+        let kv = attr(this);
+        let label = '';
+        let iid = `input-${kv.id}`;
+        if ('label' in kv) {
+            label = `<label for="${iid}">${kv.label}</label>`
+        }
+        let icon = `<span class="material-symbols-outlined">search</span>`;
+        let search = `<input id="${iid}" class="f-input-search" type="search"></input>`;
+        this.innerHTML = `${label}${icon}${search}`;
+    }
+}
+
+class FaasifyInputText extends HTMLElement {
+    constructor() {
+        super();
+    }
+    connectedCallback() {
+        this.render();
+    }
+    static get observedAttributes() {
+        return ['disabled', 'icon', 'id', 'label', 'value'];
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+        this.render();
+    }
+    render() {
+        let kv = attr(this);
+        let disabled = '';
+        let icon = '';
+        let label = '';
+        let value = '';
+        let iid = `input-${kv.id}`;
+        if ('disabled' in kv) {
+            disabled = ` disabled`;
+        }
+        if ('icon' in kv) {
+            icon = `<span class="material-symbols-outlined">${kv.icon}</span>`;
+        }
+        if ('label' in kv) {
+            label = `<label for="${iid}">${kv.label}</label>`
+        }
+        if ('value' in kv) {
+            value = ` value="${kv.value}"`
+        }
+        let input = `<input id="${iid}" class="f-input-text${disabled}" type="text"${value}${disabled}></input>`;
+        this.innerHTML = `${label}${icon}${input}`;
+    }
+}
+
 class FaasifyNumber extends HTMLElement {
     constructor() {
         super();
@@ -144,7 +233,7 @@ class FaasifyTable extends HTMLElement {
         this.render();
     }
     static get observedAttributes() {
-        return ['cols', 'id', 'rows'];
+        return ['cols', 'rows'];
     }
     attributeChangedCallback(name, oldValue, newValue) {
         this.render();
@@ -185,10 +274,37 @@ class FaasifyText extends HTMLElement {
     }
 }
 
+class FaasifyTitle extends HTMLElement {
+    constructor() {
+        super();
+    }
+    connectedCallback() {
+        this.render();
+    }
+    static get observedAttributes() {
+        return ['icon', 'value'];
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+        this.render();
+    }
+    render() {
+        let kv = attr(this);
+        let icon = '';
+        if ('icon' in kv) {
+            icon = `<span class="material-symbols-outlined">${kv.icon}</span>`;
+        }
+        this.innerHTML = `${icon}<span class="f-title">${kv.value}</span>`;
+    }
+}
+
 customElements.define('f-bar', FaasifyBar);
 customElements.define('f-button', FaasifyButton);
 customElements.define('f-card', FaasifyCard);
+customElements.define('f-input-password', FaasifyInputPassword);
+customElements.define('f-input-search', FaasifyInputSearch);
+customElements.define('f-input-text', FaasifyInputText);
 customElements.define('f-number', FaasifyNumber);
 customElements.define('f-table', FaasifyTable);
 customElements.define('f-text', FaasifyText);
+customElements.define('f-title', FaasifyTitle);
 
