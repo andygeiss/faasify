@@ -20,7 +20,7 @@ func router(cfg *config.Config) (mux *http.ServeMux) {
     cfg.Token = "{{ .Token }}"
 
     // Add functions
-    {{ range .Functions }}{{ if shouldBeSecure . }} mux.HandleFunc("/{{ . }}", WithAuthentication(cfg, WithLogging({{ . }}.HandlerFunc(cfg)))){{ else }} mux.HandleFunc("/{{ . }}", WithLogging({{ . }}.HandlerFunc(cfg))){{ end }}
+    {{ range .Functions }}{{ if shouldBeSecure . }} mux.HandleFunc("/{{ . }}", WithAuthentication(cfg, WithLogging({{ toLower . }}.HandlerFunc(cfg)))){{ else }} mux.HandleFunc("/{{ . }}", WithLogging({{ toLower . }}.HandlerFunc(cfg))){{ end }}
     {{ end }}
 
     // Serve embedded files

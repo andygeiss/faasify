@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0');
 
 :root {
-     /* built-in art styles */
+     /* neumorphism art styles */
     --neumorphism-background: #ecf0f3;
     --neumorphism-border: 1px solid var(--neumorphism-background);
     --neumorphism-border-radius: 16px;
@@ -13,16 +13,14 @@
     --neumorphism-color-text: #6e7f8d;
     --neumorphism-padding: 1rem;
     --neumorphism-margin: 1rem;
-    /* art style */
+    /* current art style */
     --background: var(--neumorphism-background);
     --border: var(--neumorphism-border);
     --border-radius: var(--neumorphism-border-radius);
     --box-shadow: var(--neumorphism-box-shadow);
     --box-shadow-inset: var(--neumorphism-box-shadow-inset);
-    /* spacing */
     --padding: var(--neumorphism-padding);
     --margin: var(--neumorphism-margin);
-    /* colors */
     --color-accent: #673ab7;
     --color-primary: var(--neumorphism-color-primary);
     --color-text: var(--neumorphism-color-text);

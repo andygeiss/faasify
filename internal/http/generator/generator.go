@@ -3,6 +3,7 @@ package generator
 import (
 	"embed"
 	"os"
+	"strings"
 	"text/template"
 )
 
@@ -71,6 +72,9 @@ func (a *generator) writeTemplate(src string, data any, dst string) {
 				return true
 			}
 			return false
+		},
+		"toLower": func(name string) string { // support spinal-case RFC3986
+			return strings.ReplaceAll(strings.ToLower(name), "-", "")
 		},
 	}).Parse(string(content))
 	if err != nil {
