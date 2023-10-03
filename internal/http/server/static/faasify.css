@@ -1,159 +1,133 @@
-/* fonts */
+/*
+  __             _
+ / _| ___  _ __ | |_ ___
+| |_ / _ \| '_ \| __/ __|
+|  _| (_) | | | | |_\__ \
+|_|  \___/|_| |_|\__|___/
+*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0');
 
 :root {
-     /* neumorphism art styles */
+    /*
+                                                 _     _
+     _ __   ___ _   _ _ __ ___   ___  _ __ _ __ | |__ (_)___ _ __ ___
+    | '_ \ / _ \ | | | '_ ` _ \ / _ \| '__| '_ \| '_ \| / __| '_ ` _ \
+    | | | |  __/ |_| | | | | | | (_) | |  | |_) | | | | \__ \ | | | | |
+    |_| |_|\___|\__,_|_| |_| |_|\___/|_|  | .__/|_| |_|_|___/_| |_| |_|
+                                          |_|
+    */
     --neumorphism-background: #ecf0f3;
-    --neumorphism-border: 1px solid var(--neumorphism-background);
+    --neumorphism-border: none;
     --neumorphism-border-radius: 16px;
-    --neumorphism-box-shadow: -5px -5px 10px #fafbffff, 5px 5px 10px #161b1d40;
-    --neumorphism-box-shadow-inset: inset -5px -5px 10px #fafbffff, inset 5px 5px 10px #161b1d40;
+    --neumorphism-box-shadow: -8px -4px 8px 0px #ffffff, 8px 4px 12px 0px #d1d9e6;
+    --neumorphism-box-shadow-inset: -8px -4px 8px 0px #ffffff, 8px 4px 12px 0px #d1d9e6, 4px 4px 4px 0px #d1d9e6 inset, -4px -4px 4px 0px #ffffff inset;
     --neumorphism-color-primary: #eff2f9;
     --neumorphism-color-text: #6e7f8d;
+    --neumorphism-color-text-light: #6e7f8d20;
     --neumorphism-padding: 1rem;
     --neumorphism-margin: 1rem;
-    /* current art style */
+    /*
+         _       __             _ _
+      __| | ___ / _| __ _ _   _| | |_
+     / _` |/ _ \ |_ / _` | | | | | __|
+    | (_| |  __/  _| (_| | |_| | | |_
+     \__,_|\___|_|  \__,_|\__,_|_|\__|
+    */
     --background: var(--neumorphism-background);
     --border: var(--neumorphism-border);
     --border-radius: var(--neumorphism-border-radius);
     --box-shadow: var(--neumorphism-box-shadow);
     --box-shadow-inset: var(--neumorphism-box-shadow-inset);
+    --line-height: 1.25rem;
     --padding: var(--neumorphism-padding);
     --margin: var(--neumorphism-margin);
-    --color-accent: #673ab7;
+    --color-accent: #673ab8d9;
+    --color-accent-light: #673ab820;
     --color-primary: var(--neumorphism-color-primary);
     --color-text: var(--neumorphism-color-text);
- }
+    --color-text-light: var(--neumorphism-color-text-light);
+}
 
+/*
+  ___ ___  _ __ ___  _ __ ___   ___  _ __
+ / __/ _ \| '_ ` _ \| '_ ` _ \ / _ \| '_ \
+| (_| (_) | | | | | | | | | | | (_) | | | |
+ \___\___/|_| |_| |_|_| |_| |_|\___/|_| |_|
+*/
 body {
-    /* colors */
     background: var(--background);
     color: var(--color-text);
-    /* font setup */
     font-family: 'Poppins', sans-serif;
     font-size: 12pt;
     font-weight: 300;
-    line-height: 1.5rem;
-    /* layout */
+    line-height: 1.75rem;
     align-items: center;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-h1, h2 {
-    padding: var(--padding);
-    margin: var(--margin);
-}
-
-h1 {
-    color: var(--color-accent);
-    font-size: 140%;
-}
-
-h2 {
-    font-size: 110%;
-}
-
-.disabled {
+/*
+  __                 _  __
+ / _| __ _  __ _ ___(_)/ _|_   _
+| |_ / _` |/ _` / __| | |_| | | |
+|  _| (_| | (_| \__ \ |  _| |_| |
+|_|  \__,_|\__,_|___/_|_|  \__, |
+                           |___/
+*/
+.f-disabled {
     background: unset !important;
     box-shadow: unset !important;
     cursor: auto !important;
 }
 
-/* faasify components */
-f-bar,
-f-button,
-f-card,
-f-input-password,
-f-input-search,
-f-input-text,
-f-table {
-    align-items: center;
-    background: var(--color-primary);
-    border: var(--border);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    color: var(--color-text);
-    display: flex;
-    padding: var(--padding);
-    margin: var(--margin);
-}
+/*
+             _                 _   _
+  __ _ _ __ (_)_ __ ___   __ _| |_(_) ___  _ __
+ / _` | '_ \| | '_ ` _ \ / _` | __| |/ _ \| '_ \
+| (_| | | | | | | | | | | (_| | |_| | (_) | | | |
+ \__,_|_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|
+*/
+@keyframes fade-in {
+    0%   { opacity: 0 }
+    100% { opacity: 1 }
+} 
 
+@keyframes fade-out {
+    0%   { opacity: 1 }
+    100% { opacity: 0 }
+} 
+
+@keyframes slide-up {
+    0%   { translateY(100%) }
+    100% { translateY(0%)   }
+} 
+
+f-card[closed]      { animation: slide-up 1s forwards, fade-out 500ms forwards }
+f-card[open]        { animation: fade-in 500ms forwards }
+f-card:not([open])  { display: none }
+
+/*
+  __       _
+ / _|     | |__   __ _ _ __
+| |_ _____| '_ \ / _` | '__|
+|  _|_____| |_) | (_| | |
+|_|       |_.__/ \__,_|_|
+*/
 f-bar {
-    align-items: end;
-    box-shadow: var(--box-shadow-inset);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column-reverse;
     height: fit-content;
-    justify-content: left;
-    padding: 0;
+    margin: auto;
     width: fit-content;
 }
-
-f-button {
-    cursor: pointer;
-    display: grid;
-    grid-template-columns: 32px 1fr;
-    padding: calc(var(--padding) / 2) var(--padding);
-    width: max-content;
-}
-
-f-button span {
-    padding: 0 calc( var(--padding) / 2);
-}
-
-f-button:hover {
-    box-shadow: var(--box-shadow-inset);
-}
-
-f-number,
-f-text,
-f-input-password,
-f-input-search,
-f-input-text,
-f-title {
-    align-items: center;
-    display: flex;
-}
-
-f-input-password,
-f-input-search,
-f-input-text,
-f-table {
-    box-shadow: unset;
-    margin: calc(var(--margin) / 2);
-    padding: calc(var(--padding) / 2);
-}
-
-f-input-password,
-f-input-search,
-f-input-text {
-    margin: var(--margin);
-    margin-top: calc(2*var(--margin));
-}
-
-f-input-password label,
-f-input-search label,
-f-input-text label {
-    font-size: 80%;
-    margin-top: -80px;
-    position: absolute;
-}
-
-f-input-password span,
-f-input-search span,
-f-input-text span {
-    position: absolute;
-    margin-left: 8px;
-}
-
-f-text {
-    text-align: left;
-}
-
+ 
 .f-bar-h {
     border-radius: inherit;
-    height: var(--padding);
+    height: .7rem;
+    margin: .16rem;
     width: calc(var(--size) / 100 * var(--percent));
 }
 
@@ -166,41 +140,405 @@ f-text {
 .f-bar-v {
     border-radius: inherit;
     height: calc(var(--size) / 100 * var(--percent));
-    width: var(--padding);
+    margin: .17rem;
+    width: .75rem;
 }
 
-.f-card-inner, .f-table-inner {
+/*
+  __       _                          _                _
+ / _|     | |__   __ _ _ __       ___| |__   __ _ _ __| |_
+| |_ _____| '_ \ / _` | '__|____ / __| '_ \ / _` | '__| __|
+|  _|_____| |_) | (_| | | |_____| (__| | | | (_| | |  | |_
+|_|       |_.__/ \__,_|_|        \___|_| |_|\__,_|_|   \__|
+*/
+f-bar-chart {
+
+}
+
+/*
+  __       _           _   _
+ / _|     | |__  _   _| |_| |_ ___  _ __
+| |_ _____| '_ \| | | | __| __/ _ \| '_ \
+|  _|_____| |_) | |_| | |_| || (_) | | | |
+|_|       |_.__/ \__,_|\__|\__\___/|_| |_|
+*/
+f-button {
     align-items: center;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
     display: grid;
-    justify-content: center;
-    width: 100%;
-}
-
-.f-number,
-.f-input-password,
-.f-input-search,
-.f-input-text,
-.f-text {
+    grid-template-columns: 32px 1fr;
+    margin: var(--margin);
     padding: calc(var(--padding) / 2);
+    width: fit-content;
+}
+
+f-button span {
+    margin: 0 calc(var(--margin) / 2);
+}
+
+f-button:hover {
+    box-shadow: var(--box-shadow-inset);
+}
+
+/*
+  __                         _
+ / _|       ___ __ _ _ __ __| |
+| |_ _____ / __/ _` | '__/ _` |
+|  _|_____| (_| (_| | | | (_| |
+|_|        \___\__,_|_|  \__,_|
+*/
+f-card {
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    height: min-content;
+    margin: var(--margin);
+    width: min-content;
+}
+
+.f-card-inner {
+    border-radius: inherit;
+    display: grid;
+    padding: var(--padding);
     width: 100%;
 }
 
-.f-number {
-    text-align: right;
+/*
+  __
+ / _|       __ _  __ _ _   _  __ _  ___
+| |_ _____ / _` |/ _` | | | |/ _` |/ _ \
+|  _|_____| (_| | (_| | |_| | (_| |  __/
+|_|        \__, |\__,_|\__,_|\__, |\___|
+           |___/             |___/
+*/
+f-gauge {
+    border-radius: 50%;
+    box-shadow: var(--box-shadow-inset);
+    height: 90px;
+    margin: 1rem;
+    position: relative;
+    width: 90px;
 }
 
-.f-input-password,
-.f-input-search,
-.f-input-text {
+f-gauge span {
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    height: 70px;
+    left: 10px;
+    justify-content: center;
+    position: absolute;
+    top: 10px;
+    width: 70px;
+}
+
+f-gauge svg {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: rotate(-90deg);
+    width: 100%;
+}
+
+f-gauge svg circle {
+    fill: transparent;
+    stroke-linecap: round;
+    stroke-width: 10;
+    transform: translate(-5px, -5px);
+}
+
+.f-gauge-percent {
+    fill: transparent;
+    stroke: var(--color-accent);
+    stroke-dasharray: var(--dasharray);
+    stroke-dashoffset: calc(var(--dasharray) - (var(--dasharray) * var(--percent)/ 100));
+}
+
+/*
+  __                                               _                _
+ / _|       __ _  __ _ _   _  __ _  ___        ___| |__   __ _ _ __| |_
+| |_ _____ / _` |/ _` | | | |/ _` |/ _ \_____ / __| '_ \ / _` | '__| __|
+|  _|_____| (_| | (_| | |_| | (_| |  __/_____| (__| | | | (_| | |  | |_
+|_|        \__, |\__,_|\__,_|\__, |\___|      \___|_| |_|\__,_|_|   \__|
+           |___/             |___/
+*/
+f-gauge-chart {
+    height: 230px;
+    margin-top: 20px;
+    position: relative;
+    width: 230px;
+}
+
+f-gauge-chart f-gauge {
+    box-shadow: unset;
+}
+
+.f-gauge-chart-1 {
+    box-shadow: var(--box-shadow-inset);
+}
+
+.f-gauge-chart-1,
+.f-gauge-chart-2, 
+.f-gauge-chart-3, 
+.f-gauge-chart-4, 
+.f-gauge-chart-5, 
+.f-gauge-chart-6, 
+.f-gauge-chart-7 { 
+    display: flex;
+    height: 210px;
+    position: absolute;
+    width: 210px;
+}
+
+.f-gauge-chart-2 { 
+    margin-left: 27px; 
+    margin-top: 5px; 
+}
+
+.f-gauge-chart-3 { 
+    margin-left: 38px; 
+    margin-top: -6px; 
+}
+
+.f-gauge-chart-4 { 
+    margin-left: 49px; 
+    margin-top: -17px; 
+}
+
+.f-gauge-chart-5 { 
+    margin-left: 60px; 
+    margin-top: -28px; 
+}
+
+.f-gauge-chart-6 { 
+    margin-left: 71px; 
+    margin-top: -39px; 
+}
+
+.f-gauge-chart-7 { 
+    margin-left: 82px; 
+    margin-top: -50px; 
+}
+
+/*
+  __       _                   _                                                  _
+ / _|     (_)_ __  _ __  _   _| |_      _ __   __ _ ___ _____      _____  _ __ __| |
+| |_ _____| | '_ \| '_ \| | | | __|____| '_ \ / _` / __/ __\ \ /\ / / _ \| '__/ _` |
+|  _|_____| | | | | |_) | |_| | ||_____| |_) | (_| \__ \__ \\ V  V / (_) | | | (_| |
+|_|       |_|_| |_| .__/ \__,_|\__|    | .__/ \__,_|___/___/ \_/\_/ \___/|_|  \__,_|
+                  |_|                  |_|
+*/
+f-input-password {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    margin: var(--margin);
+    margin-top: calc(3/2*var(--margin));
+}
+
+f-input-password label {
+    font-size: 70%;
+    margin-left: 16px;
+    margin-top: -68px;
+    position: absolute;
+}
+
+f-input-password span {
+    margin-left: 16px;
+    position: absolute;
+}
+
+f-input-password input {
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-inset);
     color: var(--color-accent);
-    padding-left: 40px;
+    height: 2.75rem;
+    padding-left: 48px;
 }
 
-.f-title {
+/*
+  __       _                   _                                _
+ / _|     (_)_ __  _ __  _   _| |_      ___  ___  __ _ _ __ ___| |__
+| |_ _____| | '_ \| '_ \| | | | __|____/ __|/ _ \/ _` | '__/ __| '_ \
+|  _|_____| | | | | |_) | |_| | ||_____\__ \  __/ (_| | | | (__| | | |
+|_|       |_|_| |_| .__/ \__,_|\__|    |___/\___|\__,_|_|  \___|_| |_|
+                  |_|
+*/
+f-input-search {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    margin: var(--margin);
+    margin-top: calc(3/2*var(--margin));
+}
+
+f-input-search label {
+    font-size: 70%;
+    margin-left: 16px;
+    margin-top: -68px;
+    position: absolute;
+}
+
+f-input-search span {
+    margin-left: 16px;
+    position: absolute;
+}
+
+f-input-search input {
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-inset);
+    color: var(--color-accent);
+    height: 2.75rem;
+    padding-left: 48px;
+}
+
+/*
+  __       _                   _        _            _
+ / _|     (_)_ __  _ __  _   _| |_     | |_ _____  _| |_
+| |_ _____| | '_ \| '_ \| | | | __|____| __/ _ \ \/ / __|
+|  _|_____| | | | | |_) | |_| | ||_____| ||  __/>  <| |_
+|_|       |_|_| |_| .__/ \__,_|\__|     \__\___/_/\_\\__|
+                  |_|
+*/
+f-input-text {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    margin: var(--margin);
+    margin-top: calc(3/2*var(--margin));
+    width: 170px;
+}
+
+f-input-text label {
+    font-size: 70%;
+    margin-left: 16px;
+    margin-top: -68px;
+    position: absolute;
+}
+
+f-input-text span {
+    margin-left: 16px;
+    position: absolute;
+}
+
+f-input-text textarea {
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-inset);
+    color: var(--color-accent);
+    height: 2.75rem;
+    padding: calc(1/2 * var(--padding));
+    padding-left: 48px;
+    resize: none;
+    width: inherit;
+}
+
+.f-input-text.disabled {
+    background: transparent;
+    box-shadow: unset;
+}
+
+/*
+  __       _                   _        _                    _
+ / _|     (_)_ __  _ __  _   _| |_     | |_ ___   __ _  __ _| | ___
+| |_ _____| | '_ \| '_ \| | | | __|____| __/ _ \ / _` |/ _` | |/ _ \
+|  _|_____| | | | | |_) | |_| | ||_____| || (_) | (_| | (_| | |  __/
+|_|       |_|_| |_| .__/ \__,_|\__|     \__\___/ \__, |\__, |_|\___|
+                  |_|                            |___/ |___/
+*/
+.f-input-toggle-inner {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+}
+
+.f-input-toggle {
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-inset);
+    height: 30px;
+    isolation: isolate;
+    position: relative;
+    width: 60px;
+}
+
+.f-input-toggle-indicator {
+    background: var(--color-primary);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    height: 100%;
+    margin-left: 20px;
+    transform: translate3d(-75%, 0, 0);
+    width: 30px;
+}
+
+.f-input-toggle-label {
+    color: var(--color-accent);
+    margin-left: 16px;
+}
+
+.f-input-toggle-state {
+    display: none;
+}
+
+.f-input-toggle-state:checked ~ .f-input-toggle-indicator {
+    transform: translate3d(25%, 0, 0);
+}
+
+/*
+  __                             _
+ / _|      _ __  _   _ _ __ ___ | |__   ___ _ __
+| |_ _____| '_ \| | | | '_ ` _ \| '_ \ / _ \ '__|
+|  _|_____| | | | |_| | | | | | | |_) |  __/ |
+|_|       |_| |_|\__,_|_| |_| |_|_.__/ \___|_|
+*/
+f-number {
+    margin: 0 calc(var(--margin) / 2);
+    text-align: right;
+    width: 100%;
+}
+
+/*
+  __       _        _     _
+ / _|     | |_ __ _| |__ | | ___
+| |_ _____| __/ _` | '_ \| |/ _ \
+|  _|_____| || (_| | |_) | |  __/
+|_|        \__\__,_|_.__/|_|\___|
+*/
+f-table {
+    height: calc(100% - var(--padding));
+    width: calc(100% - var(--padding));
+}
+
+.f-table-inner {
+    align-items: flex-start;
+    display: grid;
+}
+
+/*
+  __       _            _
+ / _|     | |_ _____  _| |_
+| |_ _____| __/ _ \ \/ / __|
+|  _|_____| ||  __/>  <| |_
+|_|        \__\___/_/\_\\__|
+*/
+f-text {
+    margin: 0 calc(var(--margin) / 2);
+    text-align: left;
+    width: 100%;
+}
+
+/*
+  __       _   _ _   _
+ / _|     | |_(_) |_| | ___
+| |_ _____| __| | __| |/ _ \
+|  _|_____| |_| | |_| |  __/
+|_|        \__|_|\__|_|\___|
+*/
+f-title {
     color: var(--color-accent);
     font-size: 140%;
-    margin: var(--margin);
+    line-height: 3.5rem;
+    margin: 0 calc(var(--margin) / 2);
 }
-
