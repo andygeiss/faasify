@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/andygeiss/faasify/internal/account"
 	"github.com/andygeiss/faasify/internal/config"
 	"golang.org/x/crypto/acme/autocert"
 )
@@ -67,33 +66,8 @@ func (a *Manager) ListenAndServe() {
 	}
 }
 
-func (a *Manager) WithAccountAccess(accountAccess account.Access) *Manager {
-	a.cfg.AccountAccess = accountAccess
-	return a
-}
-
-func (a *Manager) WithAppName(appName string) *Manager {
-	a.cfg.AppName = appName
-	return a
-}
-
-func (a *Manager) WithDomain(domain string) *Manager {
-	a.cfg.Domain = domain
-	return a
-}
-
-func (a *Manager) WithMode(mode string) *Manager {
-	a.cfg.Mode = mode
-	return a
-}
-
-func (a *Manager) WithUrl(url string) *Manager {
-	a.cfg.Url = url
-	return a
-}
-
-func NewManager() *Manager {
+func NewManager(cfg *config.Config) *Manager {
 	return &Manager{
-		cfg: &config.Config{},
+		cfg: cfg,
 	}
 }

@@ -170,12 +170,15 @@ class FaasifyButton extends HTMLElement {
     }
     render() {
         let kv = attr(this);
+        let icon = '';
+        let label = '';
         if ('icon' in kv) {
-            this.innerHTML = `<span class="material-symbols-outlined">${kv.icon}</span>`;
+            icon = `<span class="material-symbols-outlined">${kv.icon}</span>`;
         }
         if ('label' in kv) {
-            this.innerHTML += `<span>${kv.label}</span>`;
+            label = `<span>${kv.label}</span>`;
         }
+        this.innerHTML = `${icon}${label}`; 
     }
 }
 

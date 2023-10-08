@@ -22,7 +22,7 @@ func router(cfg *config.Config) (mux *http.ServeMux) {
 	mux = http.NewServeMux()
 
 	// Set generated security token
-	cfg.Token = "by5yVG3PUn+NfRVrSO/k22nTVVjpyjeh2oKX/QfemHY="
+	cfg.Token = "Sb463tuKibyvnydxT/Q7ysMG/GZKLeicS3+Xq2bDsuI="
 
 	// Add functions
 	mux.HandleFunc("/app", WithLogging(app.HandlerFunc(cfg)))
