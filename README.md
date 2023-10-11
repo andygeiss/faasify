@@ -38,11 +38,26 @@ Add a function named <code>HandlerFunc()</code> like the follow:
 
 package YOUR_FUNCTION
 
-import "net/http"
+type Request struct{}
+type Response struct {
+	Count int    `json:"count"`
+	Error string `json:"error"`
+}
 
-func HandlerFunc() http.HandlerFunc {
+var (
+	count int
+	mutex sync.Mutex
+)
+
+func HandlerFunc(cfg *config.Config) http.HandlerFunc {
+	count = 0
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("OK"))
+		server.Process[Request, Response](w, r, func(req Request) (Response, error) {
+			mutex.Lock()
+			defer mutex.Unlock()
+			count++
+			return Response{Count: count}, nil
+		})
 	}
 }
 ```
