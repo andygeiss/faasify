@@ -26,9 +26,9 @@ Login with the username <code>faasify</code> and the security token in <code>sec
 
 ## Add functions
 
-Create a new function named <code>YOUR_FUNCTION</code>:
+Create a new function named <code>count</code>:
 
-    mkdir ./functions/YOUR_FUNCTION
+    mkdir ./functions/count
 
 Add a function named <code>HandlerFunc()</code> like the following:
     
