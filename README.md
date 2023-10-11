@@ -30,13 +30,13 @@ Create a new function named <code>YOUR_FUNCTION</code>:
 
     mkdir ./functions/YOUR_FUNCTION
 
-Add a function named <code>HandlerFunc()</code> like the follow:
+Add a function named <code>HandlerFunc()</code> like the following:
     
-    vim ./functions/YOUR_FUNCTION/handler.go
+    vim ./functions/count/handler.go
 
 ```go
 
-package YOUR_FUNCTION
+package count
 
 type Request struct{}
 type Response struct {
@@ -60,6 +60,23 @@ func HandlerFunc(cfg *config.Config) http.HandlerFunc {
 		})
 	}
 }
+```
+
+Add a handler test on steroids like this:
+
+```go
+
+package count_test
+
+func TestCountSuccess(t *testing.T) {
+	cfg := &config.Config{}
+	fn := count.HandlerFunc(cfg)
+	req := count.Request{}
+	res, err := server.Validate[count.Request, count.Response](fn, "count", req, cfg)
+	assert.That("no error is returned", t, err, nil)
+	assert.That("count is 1", t, res.Count, 1)
+}
+
 ```
 
 The [function routing](/internal/http/server/router.go) gets updated on compile time, based on the contents of the functions directory.
