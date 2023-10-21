@@ -5,7 +5,7 @@ import (
 	"sync"
 
 	"github.com/andygeiss/faasify/internal/config"
-	"github.com/andygeiss/faasify/internal/http/server"
+	"github.com/andygeiss/faasify/internal/http/function"
 )
 
 type Request struct{}
@@ -22,7 +22,7 @@ var (
 func HandlerFunc(cfg *config.Config) http.HandlerFunc {
 	count = 0
 	return func(w http.ResponseWriter, r *http.Request) {
-		server.Process[Request, Response](w, r, func(req Request) (Response, error) {
+		function.Process[Request, Response](w, r, func(req Request) (Response, error) {
 			mutex.Lock()
 			defer mutex.Unlock()
 			count++

@@ -7,6 +7,7 @@ import (
 
 	"github.com/andygeiss/faasify/internal/config"
 	"github.com/andygeiss/faasify/internal/http/server/functions/app"
+	"github.com/andygeiss/faasify/internal/http/server/functions/count"
 	"github.com/andygeiss/faasify/internal/http/server/functions/index"
 	"github.com/andygeiss/faasify/internal/http/server/functions/manifest"
 	"github.com/andygeiss/faasify/internal/http/server/functions/secure"
@@ -22,10 +23,11 @@ func router(cfg *config.Config) (mux *http.ServeMux) {
 	mux = http.NewServeMux()
 
 	// Set generated security token
-	cfg.Token = "Sb463tuKibyvnydxT/Q7ysMG/GZKLeicS3+Xq2bDsuI="
+	cfg.Token = "f7HXhleUc3LxDjaohR2svPOLEhdNk5vCG3peSj4+Rlk="
 
 	// Add functions
 	mux.HandleFunc("/app", WithLogging(app.HandlerFunc(cfg)))
+	mux.HandleFunc("/count", WithAuthentication(cfg, WithLogging(count.HandlerFunc(cfg))))
 	mux.HandleFunc("/index", WithLogging(index.HandlerFunc(cfg)))
 	mux.HandleFunc("/manifest", WithLogging(manifest.HandlerFunc(cfg)))
 	mux.HandleFunc("/secure", WithAuthentication(cfg, WithLogging(secure.HandlerFunc(cfg))))
