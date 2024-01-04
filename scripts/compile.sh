@@ -27,10 +27,12 @@ if [ ! "${BASENAME_OLD}" == "${BASENAME_NEW}" ]; then
 fi
 
 mkdir -p "./build"
-
+rm -rf "./vendor"
 FAASIFY_TOKEN=${TOKEN} go generate ./...
 goimports -w ./internal/http/server/router.go
+go install github.com/tdewolff/minify/v2/cmd/minify@latest
 go mod tidy
+go mod vendor
 
 # Minify and bundle static contents
 rm -f ./static/bundle*
@@ -50,16 +52,12 @@ for FILE in $(find ./bundle/ -name "*.*"); do
     mv ${FILE}.gz ${FILE}
 done
 
-export CGO_ENABLED=0
-FAASIFY_TOKEN=${TOKEN} go build -ldflags "\
-    -s -w" \
-    -o ${SERVER_TARGET} ${SERVER_SOURCE}
-
-export GOARCH=amd64
-FAASIFY_TOKEN=${TOKEN} go build -ldflags "\
-    -s -w" \
-    -o ${SERVER_TARGET}_amd64 ${SERVER_SOURCE}
-
-# Minify binary
-upx ${SERVER_TARGET}
-upx ${SERVER_TARGET}_amd64
+for ARCH in arm64 amd64; do
+    for OS in darwin linux; do
+        CGO_ENABLED=0 GOARCH=${ARCH} GOOS=${OS} FAASIFY_TOKEN=${TOKEN} go build -ldflags "\
+            -s -w" \
+            -o ${SERVER_TARGET}_${OS}_${ARCH} ${SERVER_SOURCE}
+        # Minify binary
+        upx ${SERVER_TARGET}_${OS}_${ARCH}
+    done
+done

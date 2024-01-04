@@ -4,20 +4,26 @@
 | (_| (_) | | | | | | | | | | | (_) | | | |
  \___\___/|_| |_| |_|_| |_| |_|\___/|_| |_|
 */
+
+
+// return element by selector
 const $ = (sel) => {
     return document.querySelector(sel);
 };
 
+// return attributes of element by selector
 const attr = (ele) => {
     let values = {};
     Array.from(ele.attributes).forEach((n) => { values[n.nodeName] = n.nodeValue });
     return values;
 }
 
+// add event listener to element by selector
 const bind = (sel, evt, fn) => {
     $(sel).addEventListener(evt, fn);
 };
 
+// call faasify api
 const call = (name, data) => {
     let cfg = { 
         body: JSON.stringify(data),
@@ -30,28 +36,34 @@ const call = (name, data) => {
     .catch( (err) => { emit(name + ' error', err) });
 };
 
+// config for faasify api
 const config = { headers: { 'accept-encoding': 'gzip, deflate' }, method: 'POST' };
 
+// emit event to window
 const emit = (evt, data) => {
     window.dispatchEvent(new CustomEvent(evt, { detail: { output: data } }));
 };
 
+// add event listener to window
 const on = (evt, fn) => {
     window.addEventListener(evt, (e) => { fn(e.detail.output) });
 };
 
+// switch element to closed state
 const switchClosed = (sel) => {
     let kv = attr($(sel));
     $(sel).removeAttribute('open');
     $(sel).setAttribute('closed', '');
 };
 
+// switch element to open state
 const switchOpen = (sel) => {
     let kv = attr($(sel));
     $(sel).removeAttribute('closed');
     $(sel).setAttribute('open', '');
 };
 
+// toggle element between open and closed state
 const toggle = (sel) => {
     let kv = attr($(sel));
     if ('open' in kv) {
@@ -616,4 +628,3 @@ customElements.define('f-number', FaasifyNumber);
 customElements.define('f-table', FaasifyTable);
 customElements.define('f-text', FaasifyText);
 customElements.define('f-title', FaasifyTitle);
-
